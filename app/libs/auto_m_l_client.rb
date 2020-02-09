@@ -5,24 +5,24 @@ class AutoMLClient
 
   def initialize
     @token = GoogleToken.generate
-    @project_number = ENV['GOOGLE_PROJECT_NUMBER']
-    @address_model_id = ENV['GOOGLE_ADDRESS_MODEL_ID']
+    @project_number = ENV["GOOGLE_PROJECT_NUMBER"]
+    @address_model_id = ENV["GOOGLE_ADDRESS_MODEL_ID"]
   end
 
   def predict(content)
     options = {
       headers: {
         Authorization: "Bearer #{@token}",
-        'Content-Type': "application/json"
+        'Content-Type': "application/json",
       },
       body: {
         payload: {
           textSnippet: {
             content: content,
-            mime_type: 'text/plain'
-          }
-        }
-      }.to_json
+            mime_type: "text/plain",
+          },
+        },
+      }.to_json,
     }
 
     self.class.post(

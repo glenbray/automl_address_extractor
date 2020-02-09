@@ -5,7 +5,7 @@ class MLContentBuilder
   attr_reader :snippets, :content
 
   def self.build_groups(snippets, max_group_size = MAX_GROUP_SIZE)
-    grouped = snippets.each_with_object([]) do |snippet, arr|
+    grouped = snippets.each_with_object([]) { |snippet, arr|
       snippet_group = arr.pop || []
 
       content_size = snippet.second.size
@@ -13,7 +13,7 @@ class MLContentBuilder
 
       # calculate the space and full stop characters counts between each snippet
       join_size = 0
-      join_size = (snippet_group.size) * 2 if (snippet_group.size) > 0
+      join_size = snippet_group.size * 2 if snippet_group.size > 0
 
       group_size = snippet_group_content_size + content_size + join_size
 
@@ -24,7 +24,7 @@ class MLContentBuilder
         arr << snippet_group
         arr << [snippet]
       end
-    end
+    }
 
     grouped.map! { |group| new(group) }
   end
@@ -64,6 +64,6 @@ class MLContentBuilder
       end
     end
 
-    @content = content.join('. ')
+    @content = content.join(". ")
   end
 end

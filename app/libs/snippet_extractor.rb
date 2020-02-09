@@ -2,18 +2,18 @@ module SnippetExtractor
   extend self
 
   STATES = [
-    'new south wales',
-    'queensland',
-    'south australia',
-    'tasmania',
-    'victoria',
-    'western australia',
-    'nsw',
-    'qld',
-    'sa',
-    'tas',
-    'vic',
-    'wa'
+    "new south wales",
+    "queensland",
+    "south australia",
+    "tasmania",
+    "victoria",
+    "western australia",
+    "nsw",
+    "qld",
+    "sa",
+    "tas",
+    "vic",
+    "wa",
   ]
 
   PHONE_REGEX1 = /(\d\d|[(]\d\d[)])\s?\d\d\d\d\s?\d\d\d\d/
@@ -22,8 +22,8 @@ module SnippetExtractor
   def extract(content)
     content_parts = content.to_s
       .downcase
-      .gsub(/\P{ASCII}/, '') # remove all non ascii characters
-      .split(' ')
+      .gsub(/\P{ASCII}/, "") # remove all non ascii characters
+      .split(" ")
 
     total_size = content_parts.size
     addresses = []
@@ -61,11 +61,11 @@ module SnippetExtractor
     captured = content_parts[lower..upper]
 
     captured
-      .reject { |word| word.include?('@') }
-      .join(' ')
-      .gsub(/.*address: /, ' ') # remove "address: " and anything before it
-      .gsub(PHONE_REGEX1, ' ')
-      .gsub(PHONE_REGEX2, ' ')
+      .reject { |word| word.include?("@") }
+      .join(" ")
+      .gsub(/.*address: /, " ") # remove "address: " and anything before it
+      .gsub(PHONE_REGEX1, " ")
+      .gsub(PHONE_REGEX2, " ")
       .squish
   end
 

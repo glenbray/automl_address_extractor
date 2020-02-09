@@ -1,11 +1,11 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 
-files_dir = 'db/seed_files/scraped_data'
+files_dir = "db/seed_files/scraped_data"
 
-files = Dir.glob("#{files_dir}/*").map do |path|
+files = Dir.glob("#{files_dir}/*").map { |path|
   File.basename(path)
-end
+}
 
 files = [files.first]
 
@@ -25,6 +25,5 @@ files.each do |file|
       html: html,
       content: content
     )
-
   end
 end

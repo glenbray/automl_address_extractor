@@ -1,5 +1,5 @@
 class Address < ApplicationRecord
-  enum status: { extracted: 0, nlp: 1, verified: 2 }
+  enum status: {extracted: 0, nlp: 1, verified: 2}
 
   belongs_to :page
 

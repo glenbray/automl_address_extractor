@@ -23,15 +23,15 @@ class ExtractAddresses
 
     results.each do |builder, ml_results|
       ml_results.each do |result|
-        snippet = builder.find(result['startOffset'].to_i)
+        snippet = builder.find(result["startOffset"].to_i)
 
         next if snippet.nil?
 
         address_data << [
           snippet.page_id,
-          result['content'],
-          result['score'],
-          Address.statuses[:nlp]
+          result["content"],
+          result["score"],
+          Address.statuses[:nlp],
         ]
       end
     end
@@ -48,17 +48,17 @@ class ExtractAddresses
       # send requests to google cloud ML to extract address entities
       res = ml_client.predict(builder.content)
 
-      payload = res.parsed_response.dig('payload')
+      payload = res.parsed_response.dig("payload")
 
       next if !res.success? || payload.nil?
 
       contents = payload
-        .select { |h| h['displayName'] == 'address' }
-        .each_with_object([]) do |hash, arr|
-          content = hash.dig('textExtraction', 'textSegment')
-          content['score'] = hash.dig('textExtraction', 'score')
+        .select { |h| h["displayName"] == "address" }
+        .each_with_object([]) { |hash, arr|
+          content = hash.dig("textExtraction", "textSegment")
+          content["score"] = hash.dig("textExtraction", "score")
           arr.push(content)
-        end
+        }
 
       arr << [builder, contents]
     end
