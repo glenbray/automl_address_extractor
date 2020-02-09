@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Seed development DB
 
-Things you may want to cover:
+Json lines files will need to be provided and stored in `db/seed_files/scraped_data`. Heres an example of how a line within a file would look like.
 
-* Ruby version
+`01832172-68c9-4064-acc3-d479e4cf2319_2019-03-13T01-28-04.jl`
 
-* System dependencies
+```json
+{"site_url": "https://somesite.com.au", "page_url": "https://abcmanufacturing.com.au", "html": "<html lang=\"en\"><body><div>this is a fake website and here is a fake address: 2/19 coopanhagen rd NSW 2320. Contact US at 1200 111 111.</div></body></html>"}
 
-* Configuration
+```
+The seed script will load all `.jl` files within the directory.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
