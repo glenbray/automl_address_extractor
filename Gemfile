@@ -35,3 +35,4 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "googleauth"
 gem "httparty"
 gem "http"
+gem "activerecord-import"
