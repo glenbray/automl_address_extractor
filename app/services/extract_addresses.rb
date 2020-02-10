@@ -28,7 +28,7 @@ class ExtractAddresses
         next if snippet.nil?
 
         address_data << [
-          snippet.page_id,
+          snippet.site_id,
           result["content"],
           result["score"],
           Address.statuses[:nlp],

@@ -7,7 +7,12 @@ files = Dir.glob("#{files_dir}/*").map { |path|
   File.basename(path)
 }
 
-files = [files.first]
+progress_bar = TTY::ProgressBar.new(
+  "seeding... [:bar] :percent :eta",
+  total: files.count,
+  width: 60,
+  head: '>'
+)
 
 files.each do |file|
   IO.foreach(File.join(files_dir, file)) do |line|
@@ -25,5 +30,8 @@ files.each do |file|
       html: html,
       content: content
     )
+
   end
+
+  progress_bar.advance
 end

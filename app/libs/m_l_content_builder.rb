@@ -1,6 +1,6 @@
 class MLContentBuilder
   MAX_GROUP_SIZE = 10_000
-  Snippet = Struct.new(:page_id, :address, :start_offset, :end_offset)
+  Snippet = Struct.new(:site_id, :address, :start_offset, :end_offset)
 
   attr_reader :snippets, :content
 

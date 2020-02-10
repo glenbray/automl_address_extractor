@@ -16,21 +16,21 @@ ActiveRecord::Schema.define(version: 2020_02_08_103532) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.bigint "page_id", null: false
+    t.bigint "site_id", null: false
     t.string "street_no"
     t.string "street_name"
     t.string "suburb"
     t.string "state"
     t.string "postcode"
-    t.decimal "lat"
-    t.decimal "lng"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "lng", precision: 10, scale: 6
     t.integer "status"
     t.string "nlp_address"
     t.decimal "nlp_confidence"
     t.decimal "mappify_confidence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["page_id"], name: "index_addresses_on_page_id"
+    t.index ["site_id"], name: "index_addresses_on_site_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -51,6 +51,6 @@ ActiveRecord::Schema.define(version: 2020_02_08_103532) do
     t.index ["url"], name: "index_sites_on_url"
   end
 
-  add_foreign_key "addresses", "pages"
+  add_foreign_key "addresses", "sites"
   add_foreign_key "pages", "sites"
 end
