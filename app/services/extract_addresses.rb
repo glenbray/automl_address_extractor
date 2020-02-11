@@ -4,19 +4,12 @@ class ExtractAddresses
   end
 
   def process(sites)
-    extracted_address_snippets = []
+    extracted_address_snippets = extract_address_snippets(sites)
 
-    sites.each do |site|
-      site.pages.each do |page|
-        extracted = page.extract_address_snippets
-        extracted.map! { |address| [page.id, address] }
-        extracted_address_snippets.push(*extracted) if extracted.present?
-      end
-    end
+    content_builders = MLContentBuilder.build_groups(
+      extracted_address_snippets
+    )
 
-    extracted_address_snippets.uniq! { |snippet| snippet.second }
-
-    content_builders = MLContentBuilder.build_groups(extracted_address_snippets)
     results = nlp_search(content_builders)
 
     address_data = []
@@ -40,6 +33,21 @@ class ExtractAddresses
   end
 
   private
+
+  def extract_address_snippets(sites)
+    extracted_address_snippets = []
+
+    sites.each do |site|
+      site.pages.each do |page|
+        extracted = page.extract_address_snippets
+        extracted.map! { |address| [page.id, address] }
+        extracted_address_snippets.push(*extracted) if extracted.present?
+      end
+    end
+
+    extracted_address_snippets.uniq! { |snippet| snippet.second }
+    extracted_address_snippets
+  end
 
   def nlp_search(content_builders)
     ml_client = AutoMLClient.new
