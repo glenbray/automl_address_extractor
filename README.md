@@ -1,6 +1,7 @@
 # README
 
-Source for https://medium.com/p/10d8c36c9dfa
+Source for [dev.to article](https://dev.to/glenbray/extracting-addresses-from-millions-of-pages-with-automl-and-ruby-3djd)
+
 
 ## Setup
 
